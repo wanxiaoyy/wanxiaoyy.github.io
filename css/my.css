@@ -1,0 +1,50 @@
+/*
+type your custom css here
+在本文件键入您的自定义CSS
+升级主题文件时请注意保护本文件，防止意外覆盖。
+*/
+
+/*页面最后更新日期*/
+p.page-foot {
+    text-align: right;
+    color: #666;
+}
+
+
+/*文字居中红色*/
+p.pred {
+     text-align: center;
+     font-size: 1.5em;
+     color: #ea2000;   /*网易红*/
+     margin: -0.5em auto;
+}
+/*段中字体标红加粗*/
+span.fontred {
+    color: #ea2000;
+    font-weight: bold;
+}
+
+/*字体标红斜体*/
+.xtz {
+    color: #ea2000;
+    font-size: 0.95em;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+
+
+.fa-star{color: #f4c20d;font-size: 75%;}
+.fa-star-half-o{color: #f4c20d;font-size: 75%;}
+.fa-star-half{color: #f4c20d;font-size: 75%;}
+
+/*评论区题头*/
+
+.comment-title{
+    margin: 2rem 0 1.0rem;
+    font-size: 1.5em;
+    font-weight: 400;
+    color: black;
+}
