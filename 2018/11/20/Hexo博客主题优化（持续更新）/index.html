@@ -34,7 +34,7 @@
 <meta property="og:description" content="为博客添加版权说明以我使用的主题（Hiero）为例。  新建copyright.ejs文件在themes\hiero\layout\_partial文件夹下新建文件copyright.ejs打开copyright.ejs，并添加一下代码：">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgtc.com/QbZUSNZ.png">
-<meta property="og:updated_time" content="2018-11-23T13:29:37.815Z">
+<meta property="og:updated_time" content="2020-05-05T15:00:19.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo博客主题优化（持续更新）">
 <meta name="twitter:description" content="为博客添加版权说明以我使用的主题（Hiero）为例。  新建copyright.ejs文件在themes\hiero\layout\_partial文件夹下新建文件copyright.ejs打开copyright.ejs，并添加一下代码：">
@@ -192,7 +192,7 @@ var themeMenus = {};
 <div class="article-gallery">
   <div class="article-gallery-photos">
     
-      <a class="article-gallery-img fancybox" href="https://i.imgtc.com/QbZUSNZ.png" rel="gallery_ck9sj3gl10007k8u0ow9vxeg3">
+      <a class="article-gallery-img fancybox" href="https://i.imgtc.com/QbZUSNZ.png" rel="gallery_ck9u1itf40007xwu0vze06xxb">
         <img src="https://i.imgtc.com/QbZUSNZ.png" itemprop="image">
       </a>
     
@@ -210,7 +210,8 @@ var themeMenus = {};
 
       </header>
     
-    <div class="article-meta">
+    <div class="article-meta">      
+      
       
 	Posted on <a href="/2018/11/20/Hexo博客主题优化（持续更新）/" class="article-date">
 	  <time datetime="2018-11-20T07:11:35.000Z" itemprop="datePublished">November 20, 2018</time>
@@ -228,7 +229,7 @@ var themeMenus = {};
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">827字</span>
+        <span class="post-count">1,062字</span>
       </span>
     </span>
 
@@ -237,11 +238,12 @@ var themeMenus = {};
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">4分</span>
+        <span class="post-count">5分</span>
       </span>
     </span>
 </div>
       
+
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -285,6 +287,20 @@ var themeMenus = {};
 </li>
 </ol>
 <p>这样就能够控制每个页面的打赏按钮有无了。</p>
+<hr>
+<h3 id="文章置顶"><a href="#文章置顶" class="headerlink" title="文章置顶"></a>文章置顶</h3><p>Hexo只提供了按发布日期的排序，如果想将某一篇文章置顶，只能修改发布日期，这样麻烦且会造成混乱。</p>
+<p>在网上查了些资料后，发现一种相对简单的方法。原理：在Hexo生成首页HTML时，将top值高的文章排在前面，达到置顶功能。</p>
+<ol>
+<li><p>命令安装</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm uninstall hexo-generator-index --save</span><br><span class="line">$ npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在模板中加入top参数（<code>scaffolds/post.md</code>）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">donates: <span class="literal">true</span></span><br><span class="line">top:</span><br><span class="line">photos:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加置顶标志<br>以我使用的主题（Hiero）为例。在<code>themes\hiero\layout\article.ejs</code>中找到<code>article-meta</code>部分，并在其中添加以下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"article-meta"</span>&gt;      </span><br><span class="line">      &lt;% <span class="keyword">if</span> (post.top)&#123; %&gt;</span><br><span class="line">        &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"fa fa-thumb-tack"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">        &lt;font color=<span class="number">7</span>D26CD&gt;置顶&lt;<span class="regexp">/font&gt;</span></span><br><span class="line"><span class="regexp">        &lt;span class="post-meta-divider"&gt;|&lt;/</span>span&gt;</span><br><span class="line">      &lt;% &#125; %&gt; <span class="xml"><span class="comment">&lt;!-- 文章置顶标志，post.top有数值就会出现置顶标志--&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <hr>
 <h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h3>
       
@@ -414,7 +430,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为博客添加版权说明"><span class="nav-number">1.</span> <span class="nav-text">为博客添加版权说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打赏按钮控制"><span class="nav-number">2.</span> <span class="nav-text">打赏按钮控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未完待续"><span class="nav-number">3.</span> <span class="nav-text">未完待续</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为博客添加版权说明"><span class="nav-number">1.</span> <span class="nav-text">为博客添加版权说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打赏按钮控制"><span class="nav-number">2.</span> <span class="nav-text">打赏按钮控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章置顶"><span class="nav-number">3.</span> <span class="nav-text">文章置顶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未完待续"><span class="nav-number">4.</span> <span class="nav-text">未完待续</span></a></li></ol>
     
     </div>
   </aside>
